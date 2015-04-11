@@ -1,0 +1,45 @@
+Searching 4663 files for "$table->increments('id');"
+
+/Applications/MAMP/htdocs/laratest/database/migrations/2014_10_12_000000_create_users_table.php:
+   15  		Schema::create('users', function(Blueprint $table)
+   16  		{
+   17: 			$table->increments('id');
+   18  			$table->string('name');
+   19  			$table->string('email')->unique();
+
+/Applications/MAMP/htdocs/laratest/database/migrations/2015_04_10_082501_create_items_table.php:
+   15  		Schema::create('items', function(Blueprint $table)
+   16  		{
+   17: 			$table->increments('id');
+   18  			$table->string('name');
+   19  			$table->string('description');
+
+/Applications/MAMP/htdocs/laratest/database/migrations/2015_04_11_062031_create_user_gacha_logs_table.php:
+   15  		Schema::create('user_gacha_logs', function(Blueprint $table)
+   16  		{
+   17: 			$table->increments('id');
+   18  			$table->integer('user_id');
+   19  			$table->integer('gacha_type_id');
+
+/Applications/MAMP/htdocs/laratest/vendor/laravel/framework/src/Illuminate/Database/Migrations/stubs/create.stub:
+   15  		Schema::create('{{table}}', function(Blueprint $table)
+   16  		{
+   17: 			$table->increments('id');
+   18  			$table->timestamps();
+   19  		});
+
+/Applications/MAMP/htdocs/laratest/vendor/laravel/framework/src/Illuminate/Database/README.md:
+   54  Capsule::schema()->create('users', function($table)
+   55  {
+   56: 	$table->increments('id');
+   57  	$table->string('email')->unique();
+   58  	$table->timestamps();
+
+/Applications/MAMP/htdocs/laratest/vendor/laravel/framework/src/Illuminate/Queue/Console/stubs/failed_jobs.stub:
+   15  		Schema::create('failed_jobs', function(Blueprint $table)
+   16  		{
+   17: 			$table->increments('id');
+   18  			$table->text('connection');
+   19  			$table->text('queue');
+
+6 matches across 6 files
