@@ -11,12 +11,14 @@ class ItemTableSeeder extends Seeder {
 
         $item_name_list = array(
 	        "Arcane Ring",
-			"Armlet",
+			"Armlet of Mordiggian",
 			"Assault Cuirass",
 			"Blink Dagger",
 			"Bloodstone",
 			"Oblivion Staff",
 			"Ogre Club",
+            "Blade of Alacrity",
+            "Staff of Wizardry",
 			"Orchid Malevolence",
 			"Divine Rapier",
 			"Sange and Yasha",
@@ -25,7 +27,24 @@ class ItemTableSeeder extends Seeder {
 			"Drum of Endurance",
 			"Medallion of Courage",
 			"Smoke of Deceit",
-			"Veil of Discord"
+			"Veil of Discord",
+            "Scyther of Vyse",
+            "Gem of True Sight",
+            "Heart of Tarrasque",
+            "Mask of Madness",
+            "Black King Bar",
+            "Hood of Defiance",
+            "Diffusal Blade",
+            "Linken's Sphere",
+            "Shiva's Guard",
+            "Manta Style",
+            "Abyssal Blade",
+            "Eul's Scepter of Divinity",
+            "Aghanim's Scepter",
+            "Pipe of Insight",
+            "Hand of Midas",
+            "Ring of Basilius",
+            "Urn of Shadows"
 		 );
 
         $rarity_name = array(
