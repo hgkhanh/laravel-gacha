@@ -52,7 +52,7 @@ class GachaController extends Controller {
         if(!isset($gacha_result['error'])){
             $response = array(
                 'status' => 'success',
-                'msg' => 'draw_normal_gacha call Successfully',
+                'msg' => 'draw_expensive_gacha call Successfully',
                 'gacha' => $gacha_result,
             );
         }

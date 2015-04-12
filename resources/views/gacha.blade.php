@@ -84,6 +84,9 @@ $( document ).ready(function() {
 					$('.box-gacha.result').text(data.gacha.name);
 				}
 				$('.coin_area').text(data.gacha.current_coin);
+				if(data.gacha.price > 0){
+					$('.coin_area').css('color','red');
+				}
             },
             error: function(data) { // the data parameter here is a jqXHR instance
 		        var errors = data.responseJSON;

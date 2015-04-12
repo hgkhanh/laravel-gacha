@@ -1,5 +1,6 @@
 <?php namespace App\Services;
 
+use DB;
 use App\Gacha;
 use App\Services\GachaService;
 use App\UserGachaLog;
@@ -35,10 +36,11 @@ class ProbGachaService extends GachaService {
 
 	public function get_gacha_price($gacha_type_id)
 	{
-		if($this->can_draw_free($gacha_type_id) === true)
-			return 0;
-		else
+		if($this->can_draw_free($gacha_type_id) == false){
 			return $this->gacha_model->get_by_id($gacha_type_id)->price;
+		}
+		else
+			return 0;
 	}
 
 
@@ -53,16 +55,23 @@ class ProbGachaService extends GachaService {
 			return $gacha_result;
 		}
 
-		//begin transaction
+		// START TRANSACTION
+		$transaction_result = DB::transaction(function() use ($user_id, $gacha_type_id, $gacha_price)
+		{
 			//coin deduct
 			$result_coin = $this->user_model->spend_coin($gacha_price);
 			//log
-			$this->user_gacha_log_model->log($user_id, $gacha_type_id, $gacha_price);
+			$result_log =$this->user_gacha_log_model->log($user_id, $gacha_type_id, $gacha_price);
 			//draw gacha
 			$gacha_result = $this->draw_gacha($gacha_type_id);
+			$gacha_result['price'] = $gacha_price;
 			$gacha_result['current_coin'] = $result_coin;
-			return $gacha_result;
-		//end transaction
+
+			return $gacha_result;		
+		});
+		//END TRANSACTION
+
+		return $transaction_result;
 
 	}
 

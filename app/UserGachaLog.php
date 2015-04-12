@@ -29,7 +29,7 @@ class UserGachaLog extends Model {
 		return UserGachaLog::where(
 			'user_id', '=', $user_id)->where(
 			'gacha_type_id', '=', $gacha_type_id)->where(
-			'coin_spend', '=', 0)->first();
+			'coin_spend', '=', 0)->orderBy('created_at', 'desc')->first();
 	}
 
 	public function log($user_id, $gacha_type_id, $coin_spend)
