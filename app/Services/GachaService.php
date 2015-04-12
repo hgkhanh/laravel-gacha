@@ -26,17 +26,14 @@ class GachaService {
 	{
 		return false;
 	}
-	/**
-	 * process to draw gacha
-	 * and give new item to user
-	 *
-	 * @return result_item
-	 */
-	public function draw_gacha($gacha_type_id)
+
+	public function get_gacha_price($gacha_type_id)
 	{
-		$odd_list = $this->gacha_model->get_odd_list_by_id($gacha_type_id);
-		$rarity = $this->draw_rarity($odd_list);
-		return $this->draw_item($rarity);
+		if($this->can_draw_free($gacha_type_id) == false){
+			return $this->gacha_model->get_by_id($gacha_type_id)->price;
+		}
+		else
+			return 0;
 	}
 
 	/**

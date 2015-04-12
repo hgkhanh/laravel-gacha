@@ -5,18 +5,21 @@ use App\Gacha;
 use App\User;
 use App\Services\GachaService;
 use App\Services\ProbGachaService;
+use App\Services\BoxGachaService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Logging\Log;
 
 class GachaController extends Controller {
 
     private $prob_gacha_service;
+    private $box_gacha_service;
     private $user_model;
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->prob_gacha_service = new ProbGachaService();
+        $this->box_gacha_service = new BoxGachaService();
         $this->user_model = new User();
     }
 
@@ -68,10 +71,21 @@ class GachaController extends Controller {
 
 	public function draw_box_gacha ()
 	{
-		$response = array(
-            'status' => 'success',
-            'msg' => 'draw_box_gacha call Successfully',
-        );
+		$gacha_result = $this->box_gacha_service->process_box_gacha_draw(Auth::user()->id, Gacha::BOX_GACHA_ID);
+        if(!isset($gacha_result['error'])){
+            $response = array(
+                'status' => 'success',
+                'msg' => 'draw_expensive_gacha call Successfully',
+                'gacha' => $gacha_result,
+            );
+        }
+        else{
+            $response = array(
+                'status' => 'fail',
+                'msg' => $gacha_result['error']
+            );
+            
+        }
         return response()->json($response);
 	}
 }

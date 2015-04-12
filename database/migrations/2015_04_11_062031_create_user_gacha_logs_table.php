@@ -18,6 +18,8 @@ class CreateUserGachaLogsTable extends Migration {
 			$table->integer('user_id');
 			$table->integer('gacha_type_id');
 			$table->integer('coin_spend');
+			$table->integer('item_id');
+			$table->integer('item_rarity');
 
 			$table->timestamps();
 		});

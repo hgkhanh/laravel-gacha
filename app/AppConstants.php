@@ -15,4 +15,8 @@ class AppConstants {
 										self::ITEM_TYPE_RARE, 
 										self::ITEM_TYPE_SRARE
 										);
+
+	const GACHA_PROB_MAX			= 1000;  // 1000 -> 100%
+	const BOX_GACHA_POOL_SIZE		= 100;   // Items available in the box gacha
+	const BOX_GACHA_RESET_TIME		= '00:00:00'; 
 }

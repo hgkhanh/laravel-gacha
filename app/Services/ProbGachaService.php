@@ -34,22 +34,25 @@ class ProbGachaService extends GachaService {
 		}
 	}
 
-	public function get_gacha_price($gacha_type_id)
+	/**
+	 * process to draw gacha
+	 * and give new item to user
+	 *
+	 * @return result_item
+	 */
+	public function draw_gacha($gacha_type_id)
 	{
-		if($this->can_draw_free($gacha_type_id) == false){
-			return $this->gacha_model->get_by_id($gacha_type_id)->price;
-		}
-		else
-			return 0;
+		$odd_list = $this->gacha_model->get_odd_list_by_id($gacha_type_id);
+		$rarity = $this->draw_rarity($odd_list);
+		return $this->draw_item($rarity);
 	}
-
 
 	public function process_prob_gacha_draw($user_id, $gacha_type_id){
 		$gacha_price = $this->get_gacha_price($gacha_type_id);
 		$current_coin = $this->user_model->get_current_user_coin();
 		// not free draw ?
 			//not enough money ? return
-		if($gacha_price >= $current_coin && $gacha_price !== 0){
+		if($gacha_price !== 0 && $gacha_price >= $current_coin){
 			$gacha_result = array();
 			$gacha_result['error'] = 'Not enough Coin.';
 			return $gacha_result;
@@ -60,12 +63,16 @@ class ProbGachaService extends GachaService {
 		{
 			//coin deduct
 			$result_coin = $this->user_model->spend_coin($gacha_price);
-			//log
-			$result_log =$this->user_gacha_log_model->log($user_id, $gacha_type_id, $gacha_price);
+
 			//draw gacha
 			$gacha_result = $this->draw_gacha($gacha_type_id);
 			$gacha_result['price'] = $gacha_price;
 			$gacha_result['current_coin'] = $result_coin;
+
+			//log
+			$result_log =$this->user_gacha_log_model->log(
+				$user_id, $gacha_type_id, $gacha_price,
+				$gacha_result->id, $gacha_result->rarity);
 
 			return $gacha_result;		
 		});
