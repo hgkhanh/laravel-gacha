@@ -48,7 +48,7 @@ return [
 
 		'sqlite' => [
 			'driver'   => 'sqlite',
-			'database' => '/Applications/MAMP/db/sqlite/gacha',
+			'database' => storage_path().'/gacha.sqlite',
 			'prefix'   => '',
 		],
 

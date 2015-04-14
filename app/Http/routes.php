@@ -12,15 +12,14 @@
 */
 
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'GachaController@index');
+Route::get('home', 'GachaController@index');
 Route::get('gacha', 'GachaController@index');
+Route::get('inventory', 'Inventory@index');
 
 Route::post('gacha/drawNormal', 'GachaController@draw_normal_gacha');
 Route::post('gacha/drawExpensive', 'GachaController@draw_expensive_gacha');
 Route::post('gacha/drawBox', 'GachaController@draw_box_gacha');
-
-Route::get('home', 'HomeController@index');
-
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -6,5 +6,4 @@ class Utils  {
 		$past_time = strtotime($past_time_str);
 		return $current_timestamp - $past_time;
 	}
-
 }

@@ -9,10 +9,7 @@
 				<div class="panel-heading">Normal Gacha</div>
 
 				<div class="panel-body">
-					<button class="btn-get-coin" type="button">Draw</button>
-					<!-- {!! Form::open() !!}
-						{!! Form::submit('Draw', ['class' => 'btn-get-coin']) !!}
-					{!! Form::close() !!} -->
+					<button class="btn btn-primary btn-get-coin" type="button">Draw</button>
 					<div class="normal-gacha result">
 					</div>
 				</div>
@@ -21,10 +18,7 @@
 				<div class="panel-heading">Expensive Gacha</div>
 
 				<div class="panel-body">
-					<button class="btn-get-coin" type="button">Draw</button>
-					<!-- {!! Form::open() !!}
-						{!! Form::submit('Draw', ['class' => 'btn-get-coin']) !!}
-					{!! Form::close() !!} -->
+					<button class="btn btn-primary btn-get-coin" type="button">Draw</button>
 					<div class="expensive-gacha result">
 					</div>
 				</div>
@@ -33,10 +27,7 @@
 				<div class="panel-heading">Box Gacha</div>
 
 				<div class="panel-body">
-					<button class="btn-get-coin" type="button">Draw</button>
-					<!-- {!! Form::open() !!}
-						{!! Form::submit('Draw', ['class' => 'btn-get-coin']) !!}
-					{!! Form::close() !!} -->
+					<button class="btn btn-primary btn-get-coin" type="button">Draw</button>
 					<div class="box-gacha result">
 					</div>
 				</div>
@@ -50,6 +41,7 @@ $( document ).ready(function() {
 	var base_url = "{{URL::to('/')}}";
 	console.log(base_url);
 	$('.btn-get-coin').on('click', function(e){
+		$('.result').text('');
 		if($(this).parents('.normal-gacha').length){
 			var post_url = '/gacha/drawNormal';
 		}
@@ -72,19 +64,33 @@ $( document ).ready(function() {
             success: function( data ) {
             	console.log( data );
             	var result = data['gacha'];
+            	var msg  = data['msg'];
             	console.log( result );
-            	console.log( result["name"] );
             	if(post_url=='/gacha/drawNormal'){
-            		$('.normal-gacha.result').text(data.gacha.name);
+            		if(data['status']=='success'){
+            			$('.normal-gacha.result').text(data.gacha.name).css('color','green');
+            			$('.coin_area').text(data.gacha.current_coin);
+            		}
+            		else
+            			$('.normal-gacha.result').text(msg).css('color','red');
 				}
 				else if (post_url=='/gacha/drawExpensive'){
-					$('.expensive-gacha.result').text(data.gacha.name);
+				if(data['status']=='success'){
+						$('.expensive-gacha.result').text(data.gacha.name).css('color','green');
+						$('.coin_area').text(data.gacha.current_coin);
+					}
+					else
+            			$('.expensive-gacha.result').text(msg).css('color','red');
 				}
 				else if (post_url=='/gacha/drawBox'){
-					$('.box-gacha.result').text(data.gacha.name);
+					if(data['status']=='success'){
+						$('.box-gacha.result').text(data.gacha.name).css('color','green');
+						$('.coin_area').text(data.gacha.current_coin);
+					}
+					else
+            			$('.box-gacha.result').text(msg).css('color','red');
 				}
-				$('.coin_area').text(data.gacha.current_coin);
-				if(data.gacha.price > 0){
+				if(data['status']=='success' && data.gacha.price > 0){
 					$('.coin_area').css('color','red');
 				}
             },

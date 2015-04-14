@@ -7,7 +7,6 @@ use App\Services\GachaService;
 use App\Services\ProbGachaService;
 use App\Services\BoxGachaService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Logging\Log;
 
 class GachaController extends Controller {
 

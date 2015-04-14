@@ -25,6 +25,10 @@ class UserItem extends Model {
 	 */
 	protected $hidden = [];
 
+	public function get_user_item($user_id) {
+		return UserItem::where('user_id', '=', $user_id)->simplePaginate(10);
+	}
+
 	public function get_user_item_by_keys($user_id, $item_id) {
 		return UserItem::where('user_id', '=', $user_id)->where('item_id', '=', $item_id)->first();
 	}
