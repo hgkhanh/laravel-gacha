@@ -2,6 +2,8 @@
 
 Simple "Gacha Only" Browser Game
 
+[What is gacha ?](https://bothgunsblazingblog.wordpress.com/2013/08/07/gacha/)
+
 ## Installation & Test
 
 ### Create database
