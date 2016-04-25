@@ -1,6 +1,6 @@
 ## Synopsis
 
-Simple "Gacha Only" Browser Game
+Simple "Gacha Only" Browser Game for WorkPlace presentation
 
 ([What is gacha ?](https://bothgunsblazingblog.wordpress.com/2013/08/07/gacha/))
 
